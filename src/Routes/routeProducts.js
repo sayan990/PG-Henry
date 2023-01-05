@@ -1,5 +1,6 @@
 const express = require('express')
 const zapSchema = require('../Models/modelProducts.js')
+//const axios = require('axios')
 
 const router = express.Router()
 
@@ -7,15 +8,16 @@ const router = express.Router()
 router.post('/zapatillas', (req, res) => {
     const newProduct = zapSchema(req.body);
     newProduct.save()
-    .then((data) => res.send(data))
-    .catch((e) => res.send({error: e}))
+        .then((data) => res.send(data))
+        .catch((err) => res.send({ error: err }))
+
 })
 
 //Ruta de obtener todos los productos (zapatillas)
 router.get('/zapatillas', (req, res) => {
     zapSchema.find()
-    .then((data) => res.send(data))
-    .catch((e) => res.send({error: e}))
+        .then((data) => res.send(data))
+        .catch((e) => res.send({ error: e }))
 })
 
 //Ruta de obtener 1 producto especifico (zapatilla)
@@ -41,9 +43,9 @@ router.put('/zapatillas/:id', (req, res) => {
 router.delete('/zapatillas/:id', (req, res) => {
     const { id } = req.params;
     zapSchema
-    .remove({ _id: id })
-    .then((data) => res.send(data))
-    .catch((e) => res.send({message: e}));
-    })
-    
+        .remove({ _id: id })
+        .then((data) => res.send(data))
+        .catch((e) => res.send({ message: e }));
+})
+
 module.exports = router
