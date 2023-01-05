@@ -5,7 +5,7 @@ const zapSchema = require('../Models/modelProducts.js')
 const router = express.Router()
 
 //Ruta de creacion de productos (zapatillas)
-router.post('/zapatillas', async (req, res) => {
+router.post('/zapatillas', (req, res) => {
     const newProduct = zapSchema(e);
     newProduct.save()
         .then((data) => res.send(data))

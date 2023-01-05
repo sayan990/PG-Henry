@@ -18,7 +18,7 @@ app.use(function (req, res, next) {
 app.use('/products', routeProducts)
 
 mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log('conectado a mongo'))
-.catch((e) => console.log(e))
+    .then(() => console.log('conectado a mongo'))
+    .catch((e) => console.log(e))
 
 app.listen(port, console.log(`listening port ${port}`))

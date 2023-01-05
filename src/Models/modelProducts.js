@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const zapSchema = mongoose.Schema({
-    actividad : {
+    actividad: {
         type: String,
         require: true
     },
@@ -37,7 +37,7 @@ const zapSchema = mongoose.Schema({
         type: Array,
         require: true
     },
-    
+
 })
 
 module.exports = mongoose.model('zapatillas', zapSchema)
