@@ -6,7 +6,7 @@ const router = express.Router()
 
 //Ruta de creacion de productos (zapatillas)
 router.post('/zapatillas', (req, res) => {
-    const newProduct = zapSchema(e);
+    const newProduct = zapSchema(req.body);
     newProduct.save()
         .then((data) => res.send(data))
         .catch((err) => res.send({ error: err }))
