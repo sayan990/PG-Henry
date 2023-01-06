@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const { model } = require('mongoose');
 const zapSchema = require('../Models/modelProducts.js')
 //const axios = require('axios')
 
@@ -14,11 +15,33 @@ router.post('/zapatillas', (req, res) => {
 })
 
 //Ruta de obtener todos los productos (zapatillas)
-router.get('/zapatillas', (req, res) => {
-    zapSchema.find()
-        .then((data) => res.send(data))
-        .catch((e) => res.send({ error: e }))
+router.get('/zapatillas', async (req, res) => {
+    let { modelo } = req.query;
+    try {
+        //Este condicional busca dentro de todos los productos el que tenga en su modelo la palabra enviada por query por la barra de busqueda
+        if (modelo && modelo !== '') {
+            const zapatillas = await zapSchema.find();
+            const zapasFiltradas = zapatillas.filter(obj => obj.modelo.toLowerCase().includes(modelo.toLowerCase()));
+
+            console.log("ESTO TIENEN LAS ZAPATILLAS: ", zapasFiltradas);
+
+            if (zapasFiltradas?.length) return res.status(200).send(zapasFiltradas);
+            else return res.status(404).send(`El modelo "${modelo}" no existe.`);
+        }
+        //Este es el caso por defecto que trae todos los productos de la base de datos en caso de no enviar filtros ni busquedas por query
+        var allzapatillas = await zapSchema.find();
+        res.send(allzapatillas);
+    } catch (error) {
+        console.log(error.message);
+        res.send({ msg: error.message });
+    }
+
 })
+// router.get('/zapatillas', (req, res) => {
+//     zapSchema.find()
+//         .then((data) => res.send(data))
+//         .catch((e) => res.send({ error: e }))
+// })
 
 //Ruta de obtener 1 producto especifico (zapatilla)
 router.get('/zapatillas/:id', (req, res) => {
