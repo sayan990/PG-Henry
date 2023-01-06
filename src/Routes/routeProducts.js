@@ -18,12 +18,14 @@ router.post('/zapatillas', (req, res) => {
 router.get('/zapatillas', async (req, res) => {
     let { modelo } = req.query;
     try {
+        //Este condicional busca dentro de todos los productos el que tenga en su modelo la palabra enviada por query por la barra de busqueda
         if (modelo && modelo !== '') {
             const zapatillas = await zapSchema.find();
             const zapasFiltradas = zapatillas.filter(obj => obj.modelo.toLowerCase().includes(modelo.toLowerCase()));
             if (zapasFiltradas?.length) return res.status(200).send(zapasFiltradas);
             else return res.status(404).send(`El modelo "${modelo}" no existe.`);
         }
+        //Este es el caso por defecto que trae todos los productos de la base de datos en caso de no enviar filtros ni busquedas por query
         var allzapatillas = await zapSchema.find();
         res.send(allzapatillas);
     } catch (error) {
