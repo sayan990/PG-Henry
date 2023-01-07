@@ -3,7 +3,7 @@ const zapSchema = require('../Models/modelProducts.js');
 
 const router = express.Router();
 
-//Ruta para filtrar de manera combinada las zapatillas por talla, actividad y precio
+//Ruta para filtrar de manera combinada las zapatillas por talla, actividad y precio/
 router.get('', async (req, res) => {
 
     const products = await zapSchema.find();
