@@ -23,8 +23,6 @@ router.get('/zapatillas', async (req, res) => {
             const zapatillas = await zapSchema.find();
             const zapasFiltradas = zapatillas.filter(obj => obj.modelo.toLowerCase().includes(modelo.toLowerCase()));
 
-            console.log("ESTO TIENEN LAS ZAPATILLAS: ", zapasFiltradas);
-
             if (zapasFiltradas?.length) return res.status(200).send(zapasFiltradas);
             else return res.status(404).send(`El modelo "${modelo}" no existe.`);
         }
