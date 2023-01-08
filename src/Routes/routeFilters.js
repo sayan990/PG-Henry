@@ -1,5 +1,6 @@
 const express = require('express');
 const zapSchema = require('../Models/modelProducts.js');
+const { setOrder } = require('../Services/serviceProducts')
 
 const router = express.Router();
 
@@ -7,7 +8,7 @@ const router = express.Router();
 router.get('', async (req, res) => {
 
     const products = await zapSchema.find();
-    const { precio, talla, actividad } = req.query;
+    const { precio, talla, actividad, order } = req.query;
     let filterProducts = []
 
     if (precio && talla && actividad) {
@@ -16,8 +17,12 @@ router.get('', async (req, res) => {
                 filterProducts.push(e)
             }
         })
+        if(order !== 'default') {
+            const orderedProducts = await setOrder(filterProducts, order !== 'default' && order ? order : null);
+            return res.send(orderedProducts);
+        }
         return res.send(filterProducts);
-
+        
     };
     if (precio && talla) {
         products.forEach((e) => {
@@ -25,6 +30,10 @@ router.get('', async (req, res) => {
                 filterProducts.push(e)
             }
         })
+        if(order !== 'default') {
+            const orderedProducts = await setOrder(filterProducts, order !== 'default' && order ? order : null);
+            return res.send(orderedProducts);
+        }
         return res.send(filterProducts);
     };
     if (precio && actividad) {
@@ -33,6 +42,10 @@ router.get('', async (req, res) => {
                 filterProducts.push(e)
             }
         })
+        if(order !== 'default') {
+            const orderedProducts = await setOrder(filterProducts, order !== 'default' && order ? order : null);
+            return res.send(orderedProducts);
+        }
         return res.send(filterProducts);
     };
     if (talla && actividad) {
@@ -41,6 +54,10 @@ router.get('', async (req, res) => {
                 filterProducts.push(e)
             }
         })
+        if(order !== 'default') {
+            const orderedProducts = await setOrder(filterProducts, order !== 'default' && order ? order : null);
+            return res.send(orderedProducts);
+        }
         return res.send(filterProducts);
     };
     if (precio) {
@@ -49,6 +66,10 @@ router.get('', async (req, res) => {
                 filterProducts.push(e)
             }
         })
+        if(order !== 'default') {
+            const orderedProducts = await setOrder(filterProducts, order !== 'default' && order ? order : null);
+            return res.send(orderedProducts);
+        }
         return res.send(filterProducts);
     };
     if (talla) {
@@ -57,6 +78,10 @@ router.get('', async (req, res) => {
                 filterProducts.push(e)
             }
         })
+        if(order !== 'default') {
+            const orderedProducts = await setOrder(filterProducts, order !== 'default' && order ? order : null);
+            return res.send(orderedProducts);
+        }
         res.send(filterProducts);
     };
     if (actividad) {
@@ -65,6 +90,10 @@ router.get('', async (req, res) => {
                 filterProducts.push(e)
             }
         })
+        if(order !== 'default') {
+            const orderedProducts = await setOrder(filterProducts, order !== 'default' && order ? order : null);
+            return res.send(orderedProducts);
+        }
         return res.send(filterProducts);
     };
 });
