@@ -2,6 +2,9 @@ const express = require('express')
 const mongoose = require('mongoose')
 require('dotenv').config()
 const routeProducts = require('./Routes/routeProducts.js')
+const routeUsers = require ('./Routes/routeUsers.js')
+const routeFilters = require('./Routes/routeFilters.js')
+
 
 const app = express()
 const port = process.env.PORT || 3001
@@ -15,7 +18,11 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('/products', routeProducts)
+app.use('/products', routeProducts, routeUsers)
+app.use('/products/filtros', routeFilters)
+
+
+
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('conectado a mongo'))

@@ -1,10 +1,10 @@
 const setOrder = (products, by) => {
     switch (by) {
         case "modeloUp": {
-            return products.sort((a, b) => a.modelo.localCompare(b.modelo));
+            return products.sort((a, b) => a.modelo.localeCompare(b.modelo));
         };
         case "modeloDown": {
-            return products.sort((a,b) => b.modelo.localCompare(a.modelo));
+            return products.sort((a, b) => b.modelo.localeCompare(a.modelo));
         };
         case "precioUp": {
             return products.sort((a,b) => b.precio - a.precio);
