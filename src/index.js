@@ -4,7 +4,7 @@ require('dotenv').config()
 const routeProducts = require('./Routes/routeProducts.js')
 const routeUsers = require ('./Routes/routeUsers.js')
 const routeFilters = require('./Routes/routeFilters.js')
-
+const routeOrders = require ('./Routes/orderRoutes.js')
 
 const app = express()
 const port = process.env.PORT || 3001
@@ -18,12 +18,12 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('/products', routeProducts, routeUsers)
-app.use('/products/filtros', routeFilters)
+app.use('/productos', routeProducts);
+app.use('/productos/filtros', routeFilters);
+app.use('/usuarios', routeUsers);
+app.use('/pedido', routeOrders);
 
-
-
-
+mongoose.set('strictQuery', false);
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('conectado a mongo'))
     .catch((e) => console.log(e))
