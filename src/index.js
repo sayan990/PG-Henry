@@ -4,6 +4,8 @@ require('dotenv').config()
 const routeProducts = require('./Routes/routeProducts.js')
 const routeUsers = require ('./Routes/routeUsers.js')
 const routeFilters = require('./Routes/routeFilters.js')
+const uploadImage = require("./uploadImage.js")
+
 const routeOrders = require ('./Routes/orderRoutes.js')
 
 const app = express()
@@ -17,6 +19,18 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     next();
 });
+
+app.post("/uploadImage", (req, res) =>{
+    uploadImage(req.body.image)
+    .then((url) => res.send(url))
+    .catch((err) => res.status(500).send(err))
+})
+
+app.post("/uploadMultipleImages", (req, res) => {
+    uploadImage.uploadMultipleImages(req.body.images)
+      .then((urls) => res.send(urls))
+      .catch((err) => res.status(500).send(err));
+  });
 
 app.use('/productos', routeProducts);
 app.use('/productos/filtros', routeFilters);
