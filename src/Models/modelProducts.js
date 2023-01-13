@@ -1,43 +1,64 @@
 const mongoose = require('mongoose')
+const reviewSchema = require("./modelReviews.js")
 
 const zapSchema = mongoose.Schema({
     actividad: {
         type: String,
-        require: true
+        required: true
     },
     color: {
+        type: String,
+        required: true
+    },
+    imagenes: {
         type: Array,
-        require: true
-    },
-    imagen1: {
-        type: String,
-        require: true
-    },
-    imagen2: {
-        type: String,
-        require: true
-    },
-    imagen3: {
-        type: String,
-        require: true
+        required: true
     },
     marca: {
         type: String,
-        require: true
+        required: true
     },
     modelo: {
         type: String,
-        require: false
+        required: false
     },
     precio: {
         type: Number,
-        require: true
+        required: true
     },
-    talles: {
-        type: Array,
-        require: true
+    talla: {
+        type: Number,
+        required: true
     },
+    descripcion: {
+        type: String,
+        required: true
+    },
+    revisiones: [reviewSchema],
+    numRevisiones:{
+        type: Number,
+        required: true,
+        default: 0
+    },
+    calificacion:{
+        type: Number,
+        required: true,
+        default: 0
+    },
+    inventario: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    estado: {
+        type: Boolean,
+        required: true,
+        default: true
+    }
 
-})
+},
+{
+    timestamps: true
+});
 
 module.exports = mongoose.model('zapatillas', zapSchema)

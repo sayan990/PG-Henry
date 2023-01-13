@@ -6,6 +6,7 @@ const routeUsers = require ('./Routes/routeUsers.js')
 const routeFilters = require('./Routes/routeFilters.js')
 const uploadImage = require("./uploadImage.js")
 
+const routeOrders = require ('./Routes/orderRoutes.js')
 
 const app = express()
 const port = process.env.PORT || 3001
@@ -31,12 +32,12 @@ app.post("/uploadMultipleImages", (req, res) => {
       .catch((err) => res.status(500).send(err));
   });
 
-app.use('/products', routeProducts, routeUsers)
-app.use('/products/filtros', routeFilters)
+app.use('/productos', routeProducts);
+app.use('/productos/filtros', routeFilters);
+app.use('/usuarios', routeUsers);
+app.use('/pedido', routeOrders);
 
-
-
-
+mongoose.set('strictQuery', false);
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('conectado a mongo'))
     .catch((e) => console.log(e))
