@@ -13,7 +13,7 @@ router.post('/payment', (req, res) => {
     const product = req.body
     let preference = {
         items: [{
-            id: 123,             //En nuestro caso seria el id del producto/zapatilla
+            id: product._id,             //En nuestro caso seria el id del producto/zapatilla
             modelo: product.title, //En nuestro caso seria el modelo de la zapatilla
             imagen: product.imagen, //En nuestro caso seria la imagen del producto
             color: product.color,

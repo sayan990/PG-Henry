@@ -1,6 +1,5 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const mercadopago = require('mercadopago')
 require('dotenv').config()
 const routeProducts = require('./Routes/routeProducts.js')
 const routeUsers = require ('./Routes/routeUsers.js')
