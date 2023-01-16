@@ -6,12 +6,14 @@ const zapSchema = require('../Models/modelProducts.js')
 const router = express.Router()
 
 //Ruta de creacion de productos (zapatillas)
-router.post('/zapatillas', (req, res) => {
-    const newProduct = zapSchema(req.body);
-    newProduct.save()
-        .then((data) => res.send(data))
-        .catch((err) => res.send({ error: err }))
-
+router.post('/zapatillas', async (req, res) => {
+    try {
+        const newProduct = await zapSchema(req.body);
+        await newProduct.save()
+        res.send(newProduct)
+    } catch (error) {
+        res.status(401).send({ error: "error" })
+    }
 })
 
 //Ruta de obtener todos los productos (zapatillas)
@@ -22,6 +24,8 @@ router.get('/zapatillas', async (req, res) => {
         if (modelo && modelo !== '') {
             const zapatillas = await zapSchema.find();
             const zapasFiltradas = zapatillas.filter(obj => obj.modelo.toLowerCase().includes(modelo.toLowerCase()));
+
+            //console.log("ESTO TIENEN LAS ZAPATILLAS: ", zapasFiltradas);
 
             if (zapasFiltradas?.length) return res.status(200).send(zapasFiltradas);
             else return res.status(404).send(`El modelo "${modelo}" no existe.`);
