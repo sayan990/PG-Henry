@@ -5,6 +5,10 @@ const routeProducts = require('./Routes/routeProducts.js')
 const routeUsers = require ('./Routes/routeUsers.js')
 const routeFilters = require('./Routes/routeFilters.js')
 const uploadImage = require("./uploadImage.js")
+const mercadopago = require("mercadopago");
+const routeMp = require('./Routes/routeMp.js')
+const morgan = require('morgan')
+const { response } = require('express')
 
 const routeOrders = require ('./Routes/orderRoutes.js')
 
@@ -36,6 +40,9 @@ app.use('/productos', routeProducts);
 app.use('/productos/filtros', routeFilters);
 app.use('/usuarios', routeUsers);
 app.use('/pedido', routeOrders);
+app.use('/payment', routeMp)
+
+
 
 mongoose.set('strictQuery', false);
 mongoose.connect(process.env.MONGO_URI)
