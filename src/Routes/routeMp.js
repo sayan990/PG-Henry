@@ -53,21 +53,22 @@ mercadopago.configure({
   router.post('', (req,res) => {
     // res.status(200).send("funciona")
     const product = req.body
+    // console.log("ESTO TIENE PRODUCT ", product);
     let preference = {
         items : [{
-            id: 123,             //En nuestro caso seria el id del producto/zapatilla
-            modelo: product.title, //En nuestro caso seria el modelo de la zapatilla
-            imagen: product.imagen, //En nuestro caso seria la imagen del producto
+            id: product._id,             //En nuestro caso seria el id del producto/zapatilla
+            modelo: product.modelo, //En nuestro caso seria el modelo de la zapatilla
+            imagen: product.imagenes[0], //En nuestro caso seria la imagen del producto
             color: product.color,
-            talla: product.talla,
+            talla: product.talle,
             marca: product.marca,
             unit_price: product.precio,
             descripcion: product.descripcion,
-            quantity: product.cantidad,
+            quantity: 1,
             currency: 'ARS',
         }],
         back_urls:{
-           success: 'http://localhost:3001',
+           success: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
            failure: '',
            pending: ''
         },
