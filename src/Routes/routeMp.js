@@ -57,15 +57,15 @@ mercadopago.configure({
     let preference = {
         items : [{
             id: product._id,             //En nuestro caso seria el id del producto/zapatilla
-            modelo: product.modelo, //En nuestro caso seria el modelo de la zapatilla
-            imagen: product.imagenes[0], //En nuestro caso seria la imagen del producto
+            title: product.modelo, //En nuestro caso seria el modelo de la zapatilla
+            picture_url: product.imagenes[0], //En nuestro caso seria la imagen del producto
             color: product.color,
             talla: product.talle,
-            marca: product.marca,
+            category_id: "fashion",
             unit_price: product.precio,
-            descripcion: product.descripcion,
+            description: product.descripcion,
             quantity: 1,
-            currency: 'ARS',
+            currency_id: 'ARS',
         }],
         back_urls:{
            success: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
