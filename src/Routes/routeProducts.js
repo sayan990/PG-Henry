@@ -31,8 +31,25 @@ router.get('/zapatillas', async (req, res) => {
             else return res.status(404).send(`El modelo "${modelo}" no existe.`);
         }
         //Este es el caso por defecto que trae todos los productos de la base de datos en caso de no enviar filtros ni busquedas por query
-        var allzapatillas = await zapSchema.find();
-        res.send(allzapatillas);
+        var allZapatillas = await zapSchema.find();
+        res.send(allZapatillas);
+    } catch (error) {
+        console.log(error.message);
+        res.send({ msg: error.message });
+    }
+
+})
+//Ruta de obtener todos los productos (zapatillas) entre un rango de indices dado por query
+router.get('/zapatillas/rango', async (req, res) => {
+    //inicial es desde que indice del arreglo de productos queres que se tomen datos y final es cuantos datos se tomaran desde ese indice
+    let { inicial, final } = req.query;
+    try {
+        
+        //Este es el caso por defecto que trae todos los productos de la base de datos en caso de no enviar filtros ni busquedas por query
+        var allZapatillas = await zapSchema.find();
+
+        let rangoZapas = allZapatillas.slice(inicial, final);
+        res.send(rangoZapas);
     } catch (error) {
         console.log(error.message);
         res.send({ msg: error.message });
