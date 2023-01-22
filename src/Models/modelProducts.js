@@ -26,7 +26,7 @@ const zapSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    talla: {
+    talle: {
         type: Number,
         required: true
     },
